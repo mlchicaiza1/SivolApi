@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::resource('voluntarios', App\Http\Controllers\API\VoluntarioAPIController::class);
+
+
+Route::resource('voluntario_cursos', App\Http\Controllers\API\VoluntarioCursoAPIController::class);
