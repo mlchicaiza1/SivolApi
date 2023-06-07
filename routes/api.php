@@ -23,3 +23,15 @@ Route::resource('voluntarios', App\Http\Controllers\API\VoluntarioAPIController:
 
 
 Route::resource('voluntario_cursos', App\Http\Controllers\API\VoluntarioCursoAPIController::class);
+
+Route::resource('voluntario_dignidad', App\Http\Controllers\API\VoluntarioDignidadesAPIController::class);
+
+Route::resource('voluntario_actividad_fisica', App\Http\Controllers\API\VoluntarioActividadFisicaAPIController::class);
+
+Route::resource('voluntario_discapacidad', App\Http\Controllers\API\VoluntarioDiscapacidadAPIController::class);
+
+Route::resource('voluntario_vacuna', App\Http\Controllers\API\VoluntarioVacunaAPIController::class);
+
+Route::resource('voluntario_formacion_idioma', App\Http\Controllers\API\VoluntarioVacunaAPIController::class)->except(['index', 'store', 'show', 'update', 'destroy']);
+
+Route::resource('voluntario_formacion', App\Http\Controllers\API\VoluntarioVacunaAPIController::class);
