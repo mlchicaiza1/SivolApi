@@ -2,26 +2,23 @@
 
 namespace App\Repositories;
 
-use App\Models\Voluntario;
+use App\Models\VoluntarioEnfermedad;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class VoluntarioRepository
+ * Class VoluntarioEnfermedadRepository
  * @package App\Repositories
- * @version June 2, 2023, 10:16 pm UTC
+ * @version June 7, 2023, 2:51 am UTC
 */
 
-class VoluntarioRepository extends BaseRepository
+class VoluntarioEnfermedadRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'id_estado_voluntario',
-        'usuario',
-        'ip',
-        'creador'
+        'id'
     ];
 
     /**
@@ -39,14 +36,14 @@ class VoluntarioRepository extends BaseRepository
      **/
     public function model()
     {
-        return Voluntario::class;
+        return VoluntarioEnfermedad::class;
     }
 
     public function updateStoreProcedure($data, $id)
     {
-        $sp = DB::select('exec cre_sp_actualizarvoluntario(?,?,?,?,?)',
-            [$data['id_actividad'],$data['id_tipo_estado_seguro'],$data['usuario'],
-            $data['ip'],implode(",", $data['data_json'])]);
+        $sp = DB::select('exec cre_sp_actualizarvoluntarioenfermedad(?,?,?,?,?)',
+            [$data['id_tipo_enfermedad '],$data['usuario'],$data['ip '],
+            $data['creador'],implode(",", $data['data_json'])]);
 
         return $sp;
     }

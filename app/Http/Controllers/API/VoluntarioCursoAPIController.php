@@ -79,9 +79,9 @@ class VoluntarioCursoAPIController extends AppBaseController
             return $this->sendError('Voluntario Curso not found');
         }*/
 
-        $cursos = DB::select('CALL cre_sp_obtenervoluntariocursos(8)');
-        dd($cursos);
-       // return $this->sendResponse(new VoluntarioCursoResource($voluntarioCurso), 'Voluntario Curso retrieved successfully');
+        $cursos = DB::select('CALL cre_sp_obtenervoluntariocursos(?)',[$id]);
+        return response()->json(['status' => true, 'data' => $cursos]);
+
     }
 
     /**

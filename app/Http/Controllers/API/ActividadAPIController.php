@@ -94,7 +94,7 @@ class ActividadAPIController extends AppBaseController
     {
         $input = $request->all();
         $actividad = $this->actividadRepository->updateStoreProcedure($input, $id);
-        return $this->sendResponse(new ActividadResource($actividad), 'Actividad updated successfully');
+        return response()->json(['status' => true, 'data' => $actividad]);
     }
 
     /**

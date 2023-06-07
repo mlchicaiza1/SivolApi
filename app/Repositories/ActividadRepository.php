@@ -46,7 +46,8 @@ class ActividadRepository extends BaseRepository
     public function updateStoreProcedure($data, $id)
     {
         $sp = DB::select('exec cre_sp_actualizaractividad(?,?,?,?,?)',
-            [$data['id_actividad'],$data['id_tipo_estado_seguro'],$data['usuario'],$data['ip'],$data['data_json']]);
+            [$data['id_actividad'],$data['id_tipo_estado_seguro'],$data['usuario'],
+            $data['ip'],implode(",", $data['data_json'])]);
 
         return $sp;
     }

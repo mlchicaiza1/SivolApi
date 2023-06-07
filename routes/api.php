@@ -26,3 +26,9 @@ Route::resource('voluntario_cursos', App\Http\Controllers\API\VoluntarioCursoAPI
 
 
 Route::resource('actividads', App\Http\Controllers\API\ActividadAPIController::class);
+
+
+Route::resource('voluntario_enfermedads', App\Http\Controllers\API\VoluntarioEnfermedadAPIController::class);
+
+
+Route::resource('voluntario_situacion_laborals', App\Http\Controllers\API\VoluntarioSituacionLaboralAPIController::class);

@@ -90,20 +90,14 @@ class VoluntarioAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateVoluntarioAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
-        /** @var Voluntario $voluntario */
-        $voluntario = $this->voluntarioRepository->find($id);
+        $voluntario = $this->voluntarioRepository->updateStoreProcedure($input, $id);
+        return response()->json(['status' => true, 'data' => $voluntario]);
 
-        if (empty($voluntario)) {
-            return $this->sendError('Voluntario not found');
-        }
-
-        $voluntario = $this->voluntarioRepository->update($input, $id);
-
-        return $this->sendResponse(new VoluntarioResource($voluntario), 'Voluntario updated successfully');
+       // return $this->sendResponse(new VoluntarioResource($voluntario), 'Voluntario updated successfully');
     }
 
     /**
