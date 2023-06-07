@@ -23,3 +23,6 @@ Route::resource('voluntarios', App\Http\Controllers\API\VoluntarioAPIController:
 
 
 Route::resource('voluntario_cursos', App\Http\Controllers\API\VoluntarioCursoAPIController::class);
+
+
+Route::resource('actividads', App\Http\Controllers\API\ActividadAPIController::class);
