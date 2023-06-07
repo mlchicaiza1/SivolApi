@@ -42,7 +42,7 @@ class VoluntarioEnfermedadRepository extends BaseRepository
     public function updateStoreProcedure($data, $id)
     {
         $sp = DB::select('exec cre_sp_actualizarvoluntarioenfermedad(?,?,?,?,?)',
-            [$data['id_tipo_enfermedad '],$data['usuario'],$data['ip '],
+            [$data['id_tipo_enfermedad'],$data['usuario'],$data['ip'],
             $data['creador'],implode(",", $data['data_json'])]);
 
         return $sp;
