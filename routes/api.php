@@ -32,6 +32,8 @@ Route::resource('voluntario_discapacidad', App\Http\Controllers\API\VoluntarioDi
 
 Route::resource('voluntario_vacuna', App\Http\Controllers\API\VoluntarioVacunaAPIController::class);
 
-Route::resource('voluntario_formacion_idioma', App\Http\Controllers\API\VoluntarioVacunaAPIController::class)->except(['index', 'store', 'show', 'update', 'destroy']);
+Route::post('voluntario_formacion_idioma', [App\Http\Controllers\API\VoluntarioFormacionAPIController::class, 'storeIdioma']);
 
-Route::resource('voluntario_formacion', App\Http\Controllers\API\VoluntarioVacunaAPIController::class);
+Route::put('voluntario_formacion_idioma/{id}', [App\Http\Controllers\API\VoluntarioFormacionAPIController::class, 'updatIdioma']);
+
+Route::resource('voluntario_formacion', App\Http\Controllers\API\VoluntarioFormacionAPIController::class);
