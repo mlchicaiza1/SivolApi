@@ -57,12 +57,9 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        //$voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->create($input);
+        $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->storeActividadFisica($input);
 
-        $voluntarioActividadFisica = DB::select('CALL cre_sp_agregarvoluntarioactividadfisica(?)',[$input]);
-        dd($voluntarioActividadFisica);
-
-        return $this->sendResponse(new VoluntarioActividadFisicaResource($voluntarioActividadFisica), 'Voluntario Actividad Fisica saved successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
     }
 
     /**
@@ -98,18 +95,10 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var VoluntarioActividadFisica $voluntarioActividadFisica */
-        $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->find($id);
-        
-        if (empty($voluntarioActividadFisica)) {
-            return $this->sendError('Voluntario Actividad Fisica not found');
-        }
 
-        //$voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->update($input, $id);
-        $voluntarioActividadFisica = DB::select('CALL cre_sp_actualizarvoluntarioactividadfisica(?,?)',[$input, $id]);
-        dd($voluntarioActividadFisica);
+        $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->updateActividadFisica($input, $id);
 
-        return $this->sendResponse(new VoluntarioActividadFisicaResource($voluntarioActividadFisica), 'VoluntarioActividadFisica updated successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
     }
 
     /**
@@ -122,19 +111,12 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, UpdateVoluntarioActividadFisicaAPIRequest $request)
     {
-        /** @var VoluntarioActividadFisica $voluntarioActividadFisica */
-        //$voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->find($id);
-        
-        if (empty($voluntarioActividadFisica)) {
-            return $this->sendError('Voluntario Actividad Fisica not found');
-        }
+        $input = $request->all();
 
-        //$voluntarioActividadFisica->delete();
-        $voluntarioActividadFisica = DB::select('CALL cre_sp_eliminarvoluntarioactividadfisica(?)',[$id]);
-        dd($voluntarioActividadFisica);
+        $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->deleteActividadFisica($id, $input);
 
-        return $this->sendSuccess('Voluntario Actividad Fisica deleted successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
     }
 }

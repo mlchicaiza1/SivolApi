@@ -139,11 +139,10 @@ class VoluntarioFormacionAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        //$voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->create($input);
-        $voluntarioFormacionIdioma = DB::select('CALL cre_sp_agregarvoluntarioformacionidioma(?)',[$input]);
-        dd($voluntarioFormacionIdioma);
+        $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->storeFormacionIdioma($input);
 
-        return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacionIdioma), 'Voluntario Idioma Formacion saved successfully');
+        //return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacionIdioma), 'Voluntario Idioma Formacion saved successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioFormacionIdioma]);
     }
 
     public function updatIdioma($id, UpdateVoluntarioFormacionAPIRequest $request)
@@ -151,16 +150,15 @@ class VoluntarioFormacionAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var VoluntarioFormacion $voluntarioFormacion */
-        $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->find($id);
+        /*$voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->find($id);
 
         if (empty($voluntarioFormacionIdioma)) {
             return $this->sendError('Voluntario Idioma Formacion not found');
-        }
+        }*/
 
-        //$voluntarioFormacion = $this->voluntarioFormacionRepository->update($input, $id);
-        $voluntarioFormacionIdioma = DB::select('CALL cre_sp_actualizarvoluntarioformacionidioma(?,?)',[$input,$id]);
-        dd($voluntarioFormacionIdioma);
+        $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->updateFormacionIdioma($input, $id);
 
-        return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacionIdioma), 'Voluntario Idioma Formacion updated successfully');
+        //return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacionIdioma), 'Voluntario Idioma Formacion updated successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioFormacionIdioma]);
     }
 }

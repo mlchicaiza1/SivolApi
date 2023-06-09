@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\VoluntarioActividadFisica;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class VoluntarioActividadFisicaRepository
@@ -36,6 +37,41 @@ class VoluntarioActividadFisicaRepository extends BaseRepository
     public function model()
     {
         return VoluntarioActividadFisica::class;
+    }
+
+    public function storeActividadFisica($data){
+        $voluntarioActividadFisica = DB::select('CALL cre_sp_agregarvoluntarioactividadfisica(?,?,?,?,?)',
+            [$data['id_tipo_actividad_fisica'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            implode(",",$data['data_json'])
+            ]);
+
+        return $voluntarioActividadFisica;
+    }
+
+    public function updateActividadFisica($data, $id){
+        $voluntarioActividadFisica = DB::select('CALL cre_sp_actualizarvoluntarioactividadfisica(?,?,?,?,?)',
+            [$data['id_tipo_actividad_fisica'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            implode(",",$data['data_json'])
+            ]);
+
+        return $voluntarioActividadFisica;
+    }
+
+    public function deleteActividadFisica($id, $data){
+        $voluntarioActividadFisica = DB::select('CALL cre_sp_eliminarvoluntarioactividadfisica(?,?,?,?)',
+            [$data['id_tipo_actividad_fisica'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            ]);
+
+        return $voluntarioActividadFisica;
     }
     
 }

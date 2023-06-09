@@ -56,7 +56,7 @@ class VoluntarioDiscapacidad extends Model
      * @var array
      */
     public static $rules = [
-        'creador' => 'data_json json text'
+        
     ];
 
     

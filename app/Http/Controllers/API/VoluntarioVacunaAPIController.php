@@ -57,11 +57,9 @@ class VoluntarioVacunaAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        //$voluntarioVacuna = $this->voluntarioVacunaRepository->create($input);
-        $voluntarioVacuna = DB::select('CALL cre_sp_agregarvoluntariovacuna(?)',[$input]);
-        dd($voluntarioVacuna);
+        $voluntarioVacuna = $this->voluntarioVacunaRepository->storeVacuna($input);
 
-        return $this->sendResponse(new VoluntarioVacunaResource($voluntarioVacuna), 'Voluntario Vacuna saved successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioVacuna]);
     }
 
     /**
@@ -97,19 +95,9 @@ class VoluntarioVacunaAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var VoluntarioVacuna $voluntarioVacuna */
-        $voluntarioVacuna = $this->voluntarioVacunaRepository->find($id);
+        $voluntarioVacuna = $this->voluntarioVacunaRepository->updateVacuna($input, $id);
 
-        if (empty($voluntarioVacuna)) {
-            return $this->sendError('Voluntario Vacuna not found');
-        }
-
-        //$voluntarioVacuna = $this->voluntarioVacunaRepository->update($input, $id);
-
-        $voluntarioVacuna = DB::select('CALL cre_sp_actualizarvoluntariovacuna(?,?)',[$input, $id]);
-        dd($voluntarioVacuna);
-
-        return $this->sendResponse(new VoluntarioVacunaResource($voluntarioVacuna), 'VoluntarioVacuna updated successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioVacuna]);
     }
 
     /**
@@ -122,19 +110,12 @@ class VoluntarioVacunaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, UpdateVoluntarioVacunaAPIRequest $request)
     {
-        /** @var VoluntarioVacuna $voluntarioVacuna */
-        //$voluntarioVacuna = $this->voluntarioVacunaRepository->find($id);
+        $input = $request->all();
+        
+        $voluntarioVacuna = $this->voluntarioVacunaRepository->deleteVacuna($id, $input);
 
-        if (empty($voluntarioVacuna)) {
-            return $this->sendError('Voluntario Vacuna not found');
-        }
-
-        //$voluntarioVacuna->delete();
-        $voluntarioVacuna = DB::select('CALL  cre_sp_eliminarvoluntariovacuna(?)',[$id]);
-        dd($voluntarioVacuna);
-
-        return $this->sendSuccess('Voluntario Vacuna deleted successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioVacuna]);
     }
 }

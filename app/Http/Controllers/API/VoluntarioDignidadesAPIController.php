@@ -73,15 +73,10 @@ class VoluntarioDignidadesAPIController extends AppBaseController
     public function show($id)
     {
         /** @var VoluntarioDignidades $voluntarioDignidades */
-        //$voluntarioDignidades = $this->voluntarioDignidadesRepository->find($id);
+        
         $voluntarioDignidades = DB::select('CALL cre_sp_obtenervoluntariodignidades(?)',[$id]);
-        dd($voluntarioDignidades);
 
-        if (empty($voluntarioDignidades)) {
-            return $this->sendError('Voluntario Dignidades not found');
-        }
-
-        return $this->sendResponse(new VoluntarioDignidadesResource($voluntarioDignidades), 'Voluntario Dignidades retrieved successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioDignidades]);
     }
 
     /**

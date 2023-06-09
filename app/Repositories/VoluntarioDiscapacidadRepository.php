@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\VoluntarioDiscapacidad;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class VoluntarioDiscapacidadRepository
@@ -37,4 +38,40 @@ class VoluntarioDiscapacidadRepository extends BaseRepository
     {
         return VoluntarioDiscapacidad::class;
     }
+
+    public function storeDiscapacidad($data){
+        $voluntarioDiscapacidad = DB::select('CALL cre_sp_agregarvoluntariodiscapacidad(?,?,?,?,?)',
+            [$data['id_tipo_discapacidad'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            implode(",",$data['data_json'])
+            ]);
+
+        return $voluntarioDiscapacidad;
+    }
+
+    public function updateDiscapacidad($data,$id){
+        $voluntarioDiscapacidad = DB::select('CALL cre_sp_actualizarvoluntariodiscapacidad(?,?,?,?,?)',
+            [$data['id_tipo_discapacidad'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            implode(",",$data['data_json'])
+            ]);
+
+        return $voluntarioDiscapacidad;
+    }
+
+    public function deleteDiscapacidad($id, $data){
+        $voluntarioDiscapacidad = DB::select('CALL cre_sp_eliminarvoluntariodiscapacidad(?,?,?,?)',
+            [$data['id_tipo_discapacidad'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            ]);
+
+        return $voluntarioDiscapacidad;
+    }
+
 }

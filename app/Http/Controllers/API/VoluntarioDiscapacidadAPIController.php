@@ -57,12 +57,10 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        //$voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->create($input);
+        $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->storeDiscapacidad($input);
 
-        $voluntarioDiscapacidad = DB::select('CALL cre_sp_actualizarvoluntariodiscapacidad(?)',[$input]);
-        dd($voluntarioDiscapacidad);
-
-        return $this->sendResponse(new VoluntarioDiscapacidadResource($voluntarioDiscapacidad), 'Voluntario Discapacidad saved successfully');
+        //return $this->sendResponse(new VoluntarioDiscapacidadResource($voluntarioDiscapacidad), 'Voluntario Discapacidad saved successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioDiscapacidad]);
     }
 
     /**
@@ -99,17 +97,16 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var VoluntarioDiscapacidad $voluntarioDiscapacidad */
-        $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->find($id);
+        /*$voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->find($id);
         
         if (empty($voluntarioDiscapacidad)) {
             return $this->sendError('Voluntario Discapacidad not found');
-        }
+        }*/
 
-        //$voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->update($input, $id);
-        $voluntarioDiscapacidad = DB::select('CALL cre_sp_actualizarvoluntariodiscapacidad(?,?)',[$input, $id]);
-        dd($voluntarioDiscapacidad);
-
-        return $this->sendResponse(new VoluntarioDiscapacidadResource($voluntarioDiscapacidad), 'VoluntarioDiscapacidad updated successfully');
+        $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->updateDiscapacidad($input, $id);
+        
+        //return $this->sendResponse(new VoluntarioDiscapacidadResource($voluntarioDiscapacidad), 'VoluntarioDiscapacidad updated successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioDiscapacidad]);
     }
 
     /**
@@ -122,19 +119,12 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, UpdateVoluntarioDiscapacidadAPIRequest $request)
     {
-        /** @var VoluntarioDiscapacidad $voluntarioDiscapacidad */
-        //$voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->find($id);
+        $input = $request->all();
 
-        if (empty($voluntarioDiscapacidad)) {
-            return $this->sendError('Voluntario Discapacidad not found');
-        }
+        $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->deleteDiscapacidad($id, $input);
 
-        //$voluntarioDiscapacidad->delete();
-        $voluntarioDiscapacidad = DB::select('CALL cre_sp_eliminarvoluntariodiscapacidad(?)',[$id]);
-        dd($voluntarioDiscapacidad);
-
-        return $this->sendSuccess('Voluntario Discapacidad deleted successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioDiscapacidad]);
     }
 }

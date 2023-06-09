@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\VoluntarioVacuna;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class VoluntarioVacunaRepository
@@ -37,4 +38,40 @@ class VoluntarioVacunaRepository extends BaseRepository
     {
         return VoluntarioVacuna::class;
     }
+
+    public function storeVacuna($data){
+        $voluntarioVacuna = DB::select('CALL cre_sp_agregarvoluntariovacuna(?,?,?,?,?)',
+            [$data['id_tipo_vacuna'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            implode(",",$data['data_json'])
+            ]);
+
+        return $voluntarioVacuna;
+    }
+
+    public function updateVacuna($data, $id){
+        $voluntarioVacuna = DB::select('CALL cre_sp_actualizarvoluntariovacuna(?,?,?,?,?)',
+            [$data['id_tipo_vacuna'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            implode(",",$data['data_json'])
+            ]);
+
+        return $voluntarioVacuna;
+    }
+
+    public function deleteVacuna($id, $data){
+        $voluntarioVacuna = DB::select('CALL cre_sp_eliminarvoluntariovacuna(?,?,?,?)',
+            [$data['id_tipo_vacuna'],
+            $data['usuario'],
+            $data['ip'],
+            $data['creador'],
+            ]);
+
+        return $voluntarioVacuna;
+    }
+    
 }
