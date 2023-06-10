@@ -40,38 +40,47 @@ class VoluntarioDiscapacidadRepository extends BaseRepository
     }
 
     public function storeDiscapacidad($data){
-        $voluntarioDiscapacidad = DB::select('CALL cre_sp_agregarvoluntariodiscapacidad(?,?,?,?,?)',
-            [$data['id_tipo_discapacidad'],
+        $voluntarioDiscapacidad = DB::select('CALL cre_sp_agregarvoluntariodiscapacidad(?,?,?,?,?,?,@result)',
+            [$data['id_vol'],
+            $data['id_tipo_discapacidad'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
-            implode(",",$data['data_json'])
+            json_encode($data['data_json']),
             ]);
 
-        return $voluntarioDiscapacidad;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
-    public function updateDiscapacidad($data,$id){
-        $voluntarioDiscapacidad = DB::select('CALL cre_sp_actualizarvoluntariodiscapacidad(?,?,?,?,?)',
-            [$data['id_tipo_discapacidad'],
+    public function updateDiscapacidad($data, $id_vol){
+        $voluntarioDiscapacidad = DB::select('CALL cre_sp_actualizarvoluntariodiscapacidad(?,?,?,?,?,?,@result)',
+            [$id_vol,
+            $data['id_tipo_discapacidad'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
-            implode(",",$data['data_json'])
+            json_encode($data['data_json']),
             ]);
 
-        return $voluntarioDiscapacidad;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
-    public function deleteDiscapacidad($id, $data){
-        $voluntarioDiscapacidad = DB::select('CALL cre_sp_eliminarvoluntariodiscapacidad(?,?,?,?)',
-            [$data['id_tipo_discapacidad'],
+    public function deleteDiscapacidad($data, $id_vol){
+        $voluntarioDiscapacidad = DB::select('CALL cre_sp_eliminarvoluntariodiscapacidad(?,?,?,?,?,@result)',
+            [$id_vol,
+            $data['id_tipo_discapacidad'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
             ]);
 
-        return $voluntarioDiscapacidad;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
 }

@@ -53,7 +53,7 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateVoluntarioActividadFisicaAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
@@ -91,10 +91,9 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateVoluntarioActividadFisicaAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
-
 
         $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->updateActividadFisica($input, $id);
 
@@ -111,11 +110,11 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id, UpdateVoluntarioActividadFisicaAPIRequest $request)
+    public function destroy($id, Request $request)
     {
         $input = $request->all();
 
-        $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->deleteActividadFisica($id, $input);
+        $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->deleteActividadFisica($input, $id);
 
         return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
     }

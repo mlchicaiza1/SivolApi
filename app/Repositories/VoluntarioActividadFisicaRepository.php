@@ -40,38 +40,47 @@ class VoluntarioActividadFisicaRepository extends BaseRepository
     }
 
     public function storeActividadFisica($data){
-        $voluntarioActividadFisica = DB::select('CALL cre_sp_agregarvoluntarioactividadfisica(?,?,?,?,?)',
-            [$data['id_tipo_actividad_fisica'],
+        $voluntarioActividadFisica = DB::select('CALL cre_sp_agregarvoluntarioactividadfisica(?,?,?,?,?,?,@result)',
+            [$data['id_vol'],
+            $data['id_tipo_actividad_fisica'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
-            implode(",",$data['data_json'])
+            json_encode($data['data_json']),
             ]);
 
-        return $voluntarioActividadFisica;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
-    public function updateActividadFisica($data, $id){
-        $voluntarioActividadFisica = DB::select('CALL cre_sp_actualizarvoluntarioactividadfisica(?,?,?,?,?)',
-            [$data['id_tipo_actividad_fisica'],
+    public function updateActividadFisica($data, $id_vol){
+        $voluntarioActividadFisica = DB::select('CALL cre_sp_actualizarvoluntarioactividadfisica(?,?,?,?,?,?,@result)',
+            [$id_vol,
+            $data['id_tipo_actividad_fisica'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
-            implode(",",$data['data_json'])
+            json_encode($data['data_json']),
             ]);
 
-        return $voluntarioActividadFisica;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
-    public function deleteActividadFisica($id, $data){
-        $voluntarioActividadFisica = DB::select('CALL cre_sp_eliminarvoluntarioactividadfisica(?,?,?,?)',
-            [$data['id_tipo_actividad_fisica'],
+    public function deleteActividadFisica($data, $id_vol){
+        $voluntarioActividadFisica = DB::select('CALL cre_sp_eliminarvoluntarioactividadfisica(?,?,?,?,?,@result)',
+            [$id_vol,
+            $data['id_tipo_actividad_fisica'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
             ]);
 
-        return $voluntarioActividadFisica;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
     
 }

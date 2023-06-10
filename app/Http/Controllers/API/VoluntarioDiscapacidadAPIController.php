@@ -53,13 +53,12 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateVoluntarioDiscapacidadAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
         $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->storeDiscapacidad($input);
 
-        //return $this->sendResponse(new VoluntarioDiscapacidadResource($voluntarioDiscapacidad), 'Voluntario Discapacidad saved successfully');
         return response()->json(['status' => true, 'data' => $voluntarioDiscapacidad]);
     }
 
@@ -92,20 +91,12 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateVoluntarioDiscapacidadAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
-        /** @var VoluntarioDiscapacidad $voluntarioDiscapacidad */
-        /*$voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->find($id);
-        
-        if (empty($voluntarioDiscapacidad)) {
-            return $this->sendError('Voluntario Discapacidad not found');
-        }*/
-
         $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->updateDiscapacidad($input, $id);
         
-        //return $this->sendResponse(new VoluntarioDiscapacidadResource($voluntarioDiscapacidad), 'VoluntarioDiscapacidad updated successfully');
         return response()->json(['status' => true, 'data' => $voluntarioDiscapacidad]);
     }
 
@@ -119,11 +110,11 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id, UpdateVoluntarioDiscapacidadAPIRequest $request)
+    public function destroy($id, Request $request)
     {
         $input = $request->all();
 
-        $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->deleteDiscapacidad($id, $input);
+        $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->deleteDiscapacidad($input, $id);
 
         return response()->json(['status' => true, 'data' => $voluntarioDiscapacidad]);
     }

@@ -53,7 +53,7 @@ class VoluntarioVacunaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateVoluntarioVacunaAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
@@ -91,7 +91,7 @@ class VoluntarioVacunaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateVoluntarioVacunaAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
@@ -110,11 +110,11 @@ class VoluntarioVacunaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id, UpdateVoluntarioVacunaAPIRequest $request)
+    public function destroy($id, Request $request)
     {
         $input = $request->all();
         
-        $voluntarioVacuna = $this->voluntarioVacunaRepository->deleteVacuna($id, $input);
+        $voluntarioVacuna = $this->voluntarioVacunaRepository->deleteVacuna($input, $id);
 
         return response()->json(['status' => true, 'data' => $voluntarioVacuna]);
     }

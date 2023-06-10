@@ -40,38 +40,47 @@ class VoluntarioVacunaRepository extends BaseRepository
     }
 
     public function storeVacuna($data){
-        $voluntarioVacuna = DB::select('CALL cre_sp_agregarvoluntariovacuna(?,?,?,?,?)',
-            [$data['id_tipo_vacuna'],
+        $voluntarioVacuna = DB::select('CALL cre_sp_agregarvoluntariovacuna(?,?,?,?,?,?,@result)',
+            [$data['id_vol'],
+            $data['id_tipo_vacuna'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
-            implode(",",$data['data_json'])
+            json_encode($data['data_json']),
             ]);
 
-        return $voluntarioVacuna;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
-    public function updateVacuna($data, $id){
-        $voluntarioVacuna = DB::select('CALL cre_sp_actualizarvoluntariovacuna(?,?,?,?,?)',
-            [$data['id_tipo_vacuna'],
+    public function updateVacuna($data, $id_vol){
+        $voluntarioVacuna = DB::select('CALL cre_sp_actualizarvoluntariovacuna(?,?,?,?,?,?,@result)',
+            [$id_vol,
+            $data['id_tipo_vacuna'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
-            implode(",",$data['data_json'])
+            json_encode($data['data_json']),
             ]);
 
-        return $voluntarioVacuna;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
 
-    public function deleteVacuna($id, $data){
-        $voluntarioVacuna = DB::select('CALL cre_sp_eliminarvoluntariovacuna(?,?,?,?)',
-            [$data['id_tipo_vacuna'],
+    public function deleteVacuna($data, $id_vol){
+        $voluntarioVacuna = DB::select('CALL cre_sp_eliminarvoluntariovacuna(?,?,?,?,?,@result)',
+            [$id_vol,
+            $data['id_tipo_vacuna'],
             $data['usuario'],
             $data['ip'],
             $data['creador'],
             ]);
 
-        return $voluntarioVacuna;
+        $result = DB::select('SELECT @result as result');
+
+        return $result;
     }
     
 }

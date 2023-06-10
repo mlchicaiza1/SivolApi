@@ -53,13 +53,13 @@ class VoluntarioFormacionAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateVoluntarioFormacionAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
-        $voluntarioFormacion = $this->voluntarioFormacionRepository->create($input);
+        $voluntarioFormacionTitulo = $this->voluntarioFormacionRepository->storeFormacionTitulo($input);
 
-        return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacion), 'Voluntario Formacion saved successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioFormacionTitulo]);
     }
 
     /**
@@ -91,20 +91,13 @@ class VoluntarioFormacionAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateVoluntarioFormacionAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
-        /** @var VoluntarioFormacion $voluntarioFormacion */
-        $voluntarioFormacion = $this->voluntarioFormacionRepository->find($id);
+        $voluntarioFormacionTitulo = $this->voluntarioFormacionRepository->updateFormacionTitulo($input, $id);
 
-        if (empty($voluntarioFormacion)) {
-            return $this->sendError('Voluntario Formacion not found');
-        }
-
-        $voluntarioFormacion = $this->voluntarioFormacionRepository->update($input, $id);
-
-        return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacion), 'VoluntarioFormacion updated successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioFormacionTitulo]);
     }
 
     /**
@@ -117,48 +110,41 @@ class VoluntarioFormacionAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        /** @var VoluntarioFormacion $voluntarioFormacion */
-        //$voluntarioFormacion = $this->voluntarioFormacionRepository->find($id);
+        $input = $request->all();
 
-        if (empty($voluntarioFormacion)) {
-            return $this->sendError('Voluntario Formacion not found');
-        }
+        $voluntarioFormacionTitulo = $this->voluntarioFormacionRepository->deleteFormacionTitulo($input, $id);
 
-        //$voluntarioFormacion->delete();
-        $voluntarioFormacion = DB::select('CALL cre_sp_eliminarvoluntarioformaciontitulo(?)',[$id]);
-        dd($voluntarioFormacion);
-
-        return $this->sendSuccess('Voluntario Formacion deleted successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioFormacionTitulo]);
     }
 
     /*IDIOMA*/
 
-    public function storeIdioma(CreateVoluntarioFormacionAPIRequest $request)
+    public function storeIdioma(Request $request)
     {
         $input = $request->all();
 
         $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->storeFormacionIdioma($input);
 
-        //return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacionIdioma), 'Voluntario Idioma Formacion saved successfully');
         return response()->json(['status' => true, 'data' => $voluntarioFormacionIdioma]);
     }
 
-    public function updatIdioma($id, UpdateVoluntarioFormacionAPIRequest $request)
+    public function updateIdioma($id,Request $request)
     {
         $input = $request->all();
 
-        /** @var VoluntarioFormacion $voluntarioFormacion */
-        /*$voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->find($id);
-
-        if (empty($voluntarioFormacionIdioma)) {
-            return $this->sendError('Voluntario Idioma Formacion not found');
-        }*/
-
         $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->updateFormacionIdioma($input, $id);
 
-        //return $this->sendResponse(new VoluntarioFormacionResource($voluntarioFormacionIdioma), 'Voluntario Idioma Formacion updated successfully');
+        return response()->json(['status' => true, 'data' => $voluntarioFormacionIdioma]);
+    }
+
+    public function deleteIdioma($id,Request $request)
+    {
+        $input = $request->all();
+
+        $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->deleteFormacionIdioma($input, $id);
+
         return response()->json(['status' => true, 'data' => $voluntarioFormacionIdioma]);
     }
 }

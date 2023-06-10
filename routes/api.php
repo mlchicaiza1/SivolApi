@@ -41,6 +41,8 @@ Route::resource('voluntario_vacuna', App\Http\Controllers\API\VoluntarioVacunaAP
 
 Route::post('voluntario_formacion_idioma', [App\Http\Controllers\API\VoluntarioFormacionAPIController::class, 'storeIdioma']);
 
-Route::put('voluntario_formacion_idioma/{id}', [App\Http\Controllers\API\VoluntarioFormacionAPIController::class, 'updatIdioma']);
+Route::put('voluntario_formacion_idioma/{id}', [App\Http\Controllers\API\VoluntarioFormacionAPIController::class, 'updateIdioma']);
 
-Route::resource('voluntario_formacion', App\Http\Controllers\API\VoluntarioFormacionAPIController::class);
+Route::delete('voluntario_formacion_idioma/{id}', [App\Http\Controllers\API\VoluntarioFormacionAPIController::class, 'deleteIdioma']);
+
+Route::resource('voluntario_formacion_titulo', App\Http\Controllers\API\VoluntarioFormacionAPIController::class);
