@@ -59,7 +59,7 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
 
         $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->storeActividadFisica($input);
 
-        return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
+        return response()->json(['status' => true, 'data' => json_decode($voluntarioActividadFisica)]);
     }
 
     /**
@@ -97,7 +97,7 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
 
         $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->updateActividadFisica($input, $id);
 
-        return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
+        return response()->json(['status' => true, 'data' => json_decode($voluntarioActividadFisica)]);
     }
 
     /**
@@ -116,6 +116,6 @@ class VoluntarioActividadFisicaAPIController extends AppBaseController
 
         $voluntarioActividadFisica = $this->voluntarioActividadFisicaRepository->deleteActividadFisica($input, $id);
 
-        return response()->json(['status' => true, 'data' => $voluntarioActividadFisica]);
+        return response()->json(['status' => true, 'data' => json_decode($voluntarioActividadFisica)]);
     }
 }

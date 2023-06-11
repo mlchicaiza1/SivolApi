@@ -51,7 +51,9 @@ class VoluntarioFormacionRepository extends BaseRepository
         
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function updateFormacionIdioma($data, $id_voluntario_formacion){
@@ -66,7 +68,9 @@ class VoluntarioFormacionRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function deleteFormacionIdioma($data, $id_voluntario_formacion){
@@ -80,7 +84,9 @@ class VoluntarioFormacionRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function storeFormacionTitulo($data){
@@ -95,7 +101,9 @@ class VoluntarioFormacionRepository extends BaseRepository
         
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function updateFormacionTitulo($data, $id_voluntario_formacion){
@@ -110,7 +118,9 @@ class VoluntarioFormacionRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function deleteFormacionTitulo($data, $id_voluntario_formacion){
@@ -124,6 +134,8 @@ class VoluntarioFormacionRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 }

@@ -51,7 +51,9 @@ class VoluntarioVacunaRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function updateVacuna($data, $id_vol){
@@ -66,7 +68,9 @@ class VoluntarioVacunaRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
 
     public function deleteVacuna($data, $id_vol){
@@ -80,7 +84,9 @@ class VoluntarioVacunaRepository extends BaseRepository
 
         $result = DB::select('SELECT @result as result');
 
-        return $result;
+        $resultJson = $result[0]->result;
+
+        return $resultJson;
     }
     
 }
