@@ -59,7 +59,7 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
 
         $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->storeDiscapacidad($input);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioDiscapacidad)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioDiscapacidad)]);
     }
 
     /**
@@ -97,7 +97,7 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
 
         $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->updateDiscapacidad($input, $id);
         
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioDiscapacidad)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioDiscapacidad)]);
     }
 
     /**
@@ -116,6 +116,6 @@ class VoluntarioDiscapacidadAPIController extends AppBaseController
 
         $voluntarioDiscapacidad = $this->voluntarioDiscapacidadRepository->deleteDiscapacidad($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioDiscapacidad)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioDiscapacidad)]);
     }
 }

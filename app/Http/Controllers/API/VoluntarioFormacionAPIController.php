@@ -59,7 +59,7 @@ class VoluntarioFormacionAPIController extends AppBaseController
 
         $voluntarioFormacionTitulo = $this->voluntarioFormacionRepository->storeFormacionTitulo($input);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioFormacionTitulo)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioFormacionTitulo)]);
     }
 
     /**
@@ -97,7 +97,7 @@ class VoluntarioFormacionAPIController extends AppBaseController
 
         $voluntarioFormacionTitulo = $this->voluntarioFormacionRepository->updateFormacionTitulo($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioFormacionTitulo)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioFormacionTitulo)]);
     }
 
     /**
@@ -116,7 +116,7 @@ class VoluntarioFormacionAPIController extends AppBaseController
 
         $voluntarioFormacionTitulo = $this->voluntarioFormacionRepository->deleteFormacionTitulo($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioFormacionTitulo)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioFormacionTitulo)]);
     }
 
     /*IDIOMA*/
@@ -127,7 +127,7 @@ class VoluntarioFormacionAPIController extends AppBaseController
 
         $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->storeFormacionIdioma($input);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioFormacionIdioma)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioFormacionIdioma)]);
     }
 
     public function updateIdioma($id,Request $request)
@@ -136,7 +136,7 @@ class VoluntarioFormacionAPIController extends AppBaseController
 
         $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->updateFormacionIdioma($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioFormacionIdioma)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioFormacionIdioma)]);
     }
 
     public function deleteIdioma($id,Request $request)
@@ -145,6 +145,6 @@ class VoluntarioFormacionAPIController extends AppBaseController
 
         $voluntarioFormacionIdioma = $this->voluntarioFormacionRepository->deleteFormacionIdioma($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioFormacionIdioma)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioFormacionIdioma)]);
     }
 }

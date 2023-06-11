@@ -59,7 +59,7 @@ class VoluntarioVacunaAPIController extends AppBaseController
 
         $voluntarioVacuna = $this->voluntarioVacunaRepository->storeVacuna($input);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioVacuna)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioVacuna)]);
     }
 
     /**
@@ -97,7 +97,7 @@ class VoluntarioVacunaAPIController extends AppBaseController
 
         $voluntarioVacuna = $this->voluntarioVacunaRepository->updateVacuna($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioVacuna)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioVacuna)]);
     }
 
     /**
@@ -116,6 +116,6 @@ class VoluntarioVacunaAPIController extends AppBaseController
         
         $voluntarioVacuna = $this->voluntarioVacunaRepository->deleteVacuna($input, $id);
 
-        return response()->json(['status' => true, 'data' => json_decode($voluntarioVacuna)]);
+        return response()->json(['status' => true, 'result' => json_decode($voluntarioVacuna)]);
     }
 }
